@@ -191,7 +191,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\actorsController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\genresController.cs" />
     <Compile Include="Controllers\moviesController.cs" />
     <Compile Include="Controllers\movie_actorController.cs" />
     <Compile Include="Controllers\movie_genreController.cs" />
@@ -199,51 +199,50 @@
     <Compile Include="Controllers\rolesController.cs" />
     <Compile Include="Controllers\usersController.cs" />
     <Compile Include="Controllers\user_movieController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\actor.cs">
-      <DependentUpon>hudu.tt</DependentUpon>
+      <DependentUpon>HuduMovies.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\genre.cs">
-      <DependentUpon>hudu.tt</DependentUpon>
+      <DependentUpon>HuduMovies.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\hudu.Context.cs">
+    <Compile Include="Models\HuduMovies.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>hudu.Context.tt</DependentUpon>
+      <DependentUpon>HuduMovies.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\hudu.cs">
+    <Compile Include="Models\HuduMovies.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>hudu.tt</DependentUpon>
+      <DependentUpon>HuduMovies.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\hudu.Designer.cs">
+    <Compile Include="Models\HuduMovies.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>hudu.edmx</DependentUpon>
+      <DependentUpon>HuduMovies.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\movie.cs">
-      <DependentUpon>hudu.tt</DependentUpon>
+      <DependentUpon>HuduMovies.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\movie_actor.cs">
-      <DependentUpon>hudu.tt</DependentUpon>
+      <DependentUpon>HuduMovies.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\movie_genre.cs">
-      <DependentUpon>hudu.tt</DependentUpon>
+      <DependentUpon>HuduMovies.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\payment.cs">
-      <DependentUpon>hudu.tt</DependentUpon>
+      <DependentUpon>HuduMovies.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\role.cs">
-      <DependentUpon>hudu.tt</DependentUpon>
+      <DependentUpon>HuduMovies.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\user.cs">
-      <DependentUpon>hudu.tt</DependentUpon>
+      <DependentUpon>HuduMovies.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\user_movie.cs">
-      <DependentUpon>hudu.tt</DependentUpon>
+      <DependentUpon>HuduMovies.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -256,15 +255,15 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\hudu.Context.tt">
+    <Content Include="Models\HuduMovies.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>hudu.edmx</DependentUpon>
-      <LastGenOutput>hudu.Context.cs</LastGenOutput>
+      <DependentUpon>HuduMovies.edmx</DependentUpon>
+      <LastGenOutput>HuduMovies.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\hudu.tt">
+    <Content Include="Models\HuduMovies.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>hudu.edmx</DependentUpon>
-      <LastGenOutput>hudu.cs</LastGenOutput>
+      <DependentUpon>HuduMovies.edmx</DependentUpon>
+      <LastGenOutput>HuduMovies.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -290,12 +289,12 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Models\hudu.edmx">
+    <EntityDeploy Include="Models\HuduMovies.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>hudu.Designer.cs</LastGenOutput>
+      <LastGenOutput>HuduMovies.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\hudu.edmx.diagram">
-      <DependentUpon>hudu.edmx</DependentUpon>
+    <Content Include="Models\HuduMovies.edmx.diagram">
+      <DependentUpon>HuduMovies.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />

@@ -14,9 +14,9 @@ namespace HuduMovie.Models
     
     public partial class movie_genre
     {
+        public int movie_genre_id { get; set; }
         public int movie_id { get; set; }
         public int genre_id { get; set; }
-        public int movie_genre_id { get; set; }
     
         public virtual genre genre { get; set; }
         public virtual movie movie { get; set; }
