@@ -1,0 +1,27 @@
+﻿/*Use this insert in roles */
+/* FOR ADMIN */
+USE [hudu]
+GO
+
+INSERT INTO [dbo].[role]
+           ([role_name])
+     VALUES
+           ('Admin')
+GO
+
+
+
+/*Use this insert in roles */
+/* FOR USER */
+USE [hudu]
+GO
+
+INSERT INTO [dbo].[role]
+           ([role_name])
+     VALUES
+		   ('User')
+GO
+
+
+
+/* Use this insert in User  */
