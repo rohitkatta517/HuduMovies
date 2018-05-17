@@ -1,0 +1,597 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="huduModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="actor">
+          <Key>
+            <PropertyRef Name="actor_id" />
+          </Key>
+          <Property Name="actor_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="actor_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="actor_gender" Type="char" MaxLength="7" Nullable="false" />
+          <Property Name="actor_wiki_link" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="genre">
+          <Key>
+            <PropertyRef Name="genre_id" />
+          </Key>
+          <Property Name="genre_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="genre_name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="movie">
+          <Key>
+            <PropertyRef Name="movie_id" />
+          </Key>
+          <Property Name="movie_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="movie_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="movie_year" Type="int" />
+          <Property Name="movie_description" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="movie_runtime" Type="int" />
+        </EntityType>
+        <EntityType Name="movie_actor">
+          <Key>
+            <PropertyRef Name="movie_actor_cast" />
+          </Key>
+          <Property Name="movie_id" Type="int" Nullable="false" />
+          <Property Name="actor_id" Type="int" Nullable="false" />
+          <Property Name="movie_actor_cast" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="movie_genre">
+          <Key>
+            <PropertyRef Name="movie_genre_id" />
+          </Key>
+          <Property Name="movie_id" Type="int" Nullable="false" />
+          <Property Name="genre_id" Type="int" Nullable="false" />
+          <Property Name="movie_genre_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="payment">
+          <Key>
+            <PropertyRef Name="payment_id" />
+          </Key>
+          <Property Name="payment_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="payment_user_id" Type="int" Nullable="false" />
+          <Property Name="payment_card_number" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="payment_card_cvv" Type="int" Nullable="false" />
+          <Property Name="payement_card_expiry" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="role_id" />
+          </Key>
+          <Property Name="role_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="role_name" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_fname" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="user_lname" Type="varbinary" MaxLength="25" Nullable="false" />
+          <Property Name="user_date_of_birth" Type="date" />
+          <Property Name="user_email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="passwordhash" Type="varchar(max)" Nullable="false" />
+          <Property Name="role_id" Type="int" Nullable="false" />
+          <Property Name="user_is_active" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user_movie">
+          <Key>
+            <PropertyRef Name="user_movies_id" />
+          </Key>
+          <Property Name="user_movies_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="movie_id" Type="int" Nullable="false" />
+          <Property Name="movie_rental_expiry" Type="date" Nullable="false" />
+          <Property Name="movie_owns" Type="int" />
+          <Property Name="movie_tx_date" Type="date" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_movie_actor_actor">
+          <End Role="actor" Type="Self.actor" Multiplicity="1" />
+          <End Role="movie_actor" Type="Self.movie_actor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="actor">
+              <PropertyRef Name="actor_id" />
+            </Principal>
+            <Dependent Role="movie_actor">
+              <PropertyRef Name="actor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_movie_actor_movie">
+          <End Role="movie" Type="Self.movie" Multiplicity="1" />
+          <End Role="movie_actor" Type="Self.movie_actor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="movie">
+              <PropertyRef Name="movie_id" />
+            </Principal>
+            <Dependent Role="movie_actor">
+              <PropertyRef Name="movie_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_movie_genre_genre">
+          <End Role="genre" Type="Self.genre" Multiplicity="1" />
+          <End Role="movie_genre" Type="Self.movie_genre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="genre">
+              <PropertyRef Name="genre_id" />
+            </Principal>
+            <Dependent Role="movie_genre">
+              <PropertyRef Name="genre_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_movie_genre_movie_genre">
+          <End Role="movie" Type="Self.movie" Multiplicity="1" />
+          <End Role="movie_genre" Type="Self.movie_genre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="movie">
+              <PropertyRef Name="movie_id" />
+            </Principal>
+            <Dependent Role="movie_genre">
+              <PropertyRef Name="movie_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_payment_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="payment" Type="Self.payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="payment">
+              <PropertyRef Name="payment_user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_movie_id">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="user_movie" Type="Self.user_movie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="user_movie">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_movie_movie">
+          <End Role="movie" Type="Self.movie" Multiplicity="1" />
+          <End Role="user_movie" Type="Self.user_movie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="movie">
+              <PropertyRef Name="movie_id" />
+            </Principal>
+            <Dependent Role="user_movie">
+              <PropertyRef Name="movie_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_role">
+          <End Role="role" Type="Self.role" Multiplicity="1" />
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="role_id" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="huduModelStoreContainer">
+          <EntitySet Name="actor" EntityType="Self.actor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="genre" EntityType="Self.genre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="movie" EntityType="Self.movie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="movie_actor" EntityType="Self.movie_actor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="movie_genre" EntityType="Self.movie_genre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="payment" EntityType="Self.payment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="role" EntityType="Self.role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user_movie" EntityType="Self.user_movie" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_movie_actor_actor" Association="Self.FK_movie_actor_actor">
+            <End Role="actor" EntitySet="actor" />
+            <End Role="movie_actor" EntitySet="movie_actor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_movie_actor_movie" Association="Self.FK_movie_actor_movie">
+            <End Role="movie" EntitySet="movie" />
+            <End Role="movie_actor" EntitySet="movie_actor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_movie_genre_genre" Association="Self.FK_movie_genre_genre">
+            <End Role="genre" EntitySet="genre" />
+            <End Role="movie_genre" EntitySet="movie_genre" />
+          </AssociationSet>
+          <AssociationSet Name="FK_movie_genre_movie_genre" Association="Self.FK_movie_genre_movie_genre">
+            <End Role="movie" EntitySet="movie" />
+            <End Role="movie_genre" EntitySet="movie_genre" />
+          </AssociationSet>
+          <AssociationSet Name="FK_payment_user" Association="Self.FK_payment_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="payment" EntitySet="payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_movie_id" Association="Self.FK_user_movie_id">
+            <End Role="user" EntitySet="user" />
+            <End Role="user_movie" EntitySet="user_movie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_movie_movie" Association="Self.FK_user_movie_movie">
+            <End Role="movie" EntitySet="movie" />
+            <End Role="user_movie" EntitySet="user_movie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_role" Association="Self.FK_user_role">
+            <End Role="role" EntitySet="role" />
+            <End Role="user" EntitySet="user" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="huduModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="actor">
+          <Key>
+            <PropertyRef Name="actor_id" />
+          </Key>
+          <Property Name="actor_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="actor_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="actor_gender" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="actor_wiki_link" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="movie_actor" Relationship="Self.FK_movie_actor_actor" FromRole="actor" ToRole="movie_actor" />
+        </EntityType>
+        <EntityType Name="genre">
+          <Key>
+            <PropertyRef Name="genre_id" />
+          </Key>
+          <Property Name="genre_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="genre_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="movie_genre" Relationship="Self.FK_movie_genre_genre" FromRole="genre" ToRole="movie_genre" />
+        </EntityType>
+        <EntityType Name="movie">
+          <Key>
+            <PropertyRef Name="movie_id" />
+          </Key>
+          <Property Name="movie_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="movie_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="movie_year" Type="Int32" />
+          <Property Name="movie_description" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="movie_runtime" Type="Int32" />
+          <NavigationProperty Name="movie_actor" Relationship="Self.FK_movie_actor_movie" FromRole="movie" ToRole="movie_actor" />
+          <NavigationProperty Name="movie_genre" Relationship="Self.FK_movie_genre_movie_genre" FromRole="movie" ToRole="movie_genre" />
+          <NavigationProperty Name="user_movie" Relationship="Self.FK_user_movie_movie" FromRole="movie" ToRole="user_movie" />
+        </EntityType>
+        <EntityType Name="movie_actor">
+          <Key>
+            <PropertyRef Name="movie_actor_cast" />
+          </Key>
+          <Property Name="movie_id" Type="Int32" Nullable="false" />
+          <Property Name="actor_id" Type="Int32" Nullable="false" />
+          <Property Name="movie_actor_cast" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="actor" Relationship="Self.FK_movie_actor_actor" FromRole="movie_actor" ToRole="actor" />
+          <NavigationProperty Name="movie" Relationship="Self.FK_movie_actor_movie" FromRole="movie_actor" ToRole="movie" />
+        </EntityType>
+        <EntityType Name="movie_genre">
+          <Key>
+            <PropertyRef Name="movie_genre_id" />
+          </Key>
+          <Property Name="movie_id" Type="Int32" Nullable="false" />
+          <Property Name="genre_id" Type="Int32" Nullable="false" />
+          <Property Name="movie_genre_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="genre" Relationship="Self.FK_movie_genre_genre" FromRole="movie_genre" ToRole="genre" />
+          <NavigationProperty Name="movie" Relationship="Self.FK_movie_genre_movie_genre" FromRole="movie_genre" ToRole="movie" />
+        </EntityType>
+        <EntityType Name="payment">
+          <Key>
+            <PropertyRef Name="payment_id" />
+          </Key>
+          <Property Name="payment_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="payment_user_id" Type="Int32" Nullable="false" />
+          <Property Name="payment_card_number" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="payment_card_cvv" Type="Int32" Nullable="false" />
+          <Property Name="payement_card_expiry" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="user" Relationship="Self.FK_payment_user" FromRole="payment" ToRole="user" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="role_id" />
+          </Key>
+          <Property Name="role_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="role_name" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="users" Relationship="Self.FK_user_role" FromRole="role" ToRole="user" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_fname" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_lname" Type="Binary" MaxLength="25" FixedLength="false" Nullable="false" />
+          <Property Name="user_date_of_birth" Type="DateTime" Precision="0" />
+          <Property Name="user_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="passwordhash" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="role_id" Type="Int32" Nullable="false" />
+          <Property Name="user_is_active" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="payments" Relationship="Self.FK_payment_user" FromRole="user" ToRole="payment" />
+          <NavigationProperty Name="role" Relationship="Self.FK_user_role" FromRole="user" ToRole="role" />
+          <NavigationProperty Name="user_movie" Relationship="Self.FK_user_movie_id" FromRole="user" ToRole="user_movie" />
+        </EntityType>
+        <EntityType Name="user_movie">
+          <Key>
+            <PropertyRef Name="user_movies_id" />
+          </Key>
+          <Property Name="user_movies_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="movie_id" Type="Int32" Nullable="false" />
+          <Property Name="movie_rental_expiry" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="movie_owns" Type="Int32" />
+          <Property Name="movie_tx_date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="movie" Relationship="Self.FK_user_movie_movie" FromRole="user_movie" ToRole="movie" />
+          <NavigationProperty Name="user" Relationship="Self.FK_user_movie_id" FromRole="user_movie" ToRole="user" />
+        </EntityType>
+        <Association Name="FK_movie_actor_actor">
+          <End Role="actor" Type="Self.actor" Multiplicity="1" />
+          <End Role="movie_actor" Type="Self.movie_actor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="actor">
+              <PropertyRef Name="actor_id" />
+            </Principal>
+            <Dependent Role="movie_actor">
+              <PropertyRef Name="actor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_movie_genre_genre">
+          <End Role="genre" Type="Self.genre" Multiplicity="1" />
+          <End Role="movie_genre" Type="Self.movie_genre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="genre">
+              <PropertyRef Name="genre_id" />
+            </Principal>
+            <Dependent Role="movie_genre">
+              <PropertyRef Name="genre_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_movie_actor_movie">
+          <End Role="movie" Type="Self.movie" Multiplicity="1" />
+          <End Role="movie_actor" Type="Self.movie_actor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="movie">
+              <PropertyRef Name="movie_id" />
+            </Principal>
+            <Dependent Role="movie_actor">
+              <PropertyRef Name="movie_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_movie_genre_movie_genre">
+          <End Role="movie" Type="Self.movie" Multiplicity="1" />
+          <End Role="movie_genre" Type="Self.movie_genre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="movie">
+              <PropertyRef Name="movie_id" />
+            </Principal>
+            <Dependent Role="movie_genre">
+              <PropertyRef Name="movie_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_movie_movie">
+          <End Role="movie" Type="Self.movie" Multiplicity="1" />
+          <End Role="user_movie" Type="Self.user_movie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="movie">
+              <PropertyRef Name="movie_id" />
+            </Principal>
+            <Dependent Role="user_movie">
+              <PropertyRef Name="movie_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_payment_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="payment" Type="Self.payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="payment">
+              <PropertyRef Name="payment_user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_role">
+          <End Role="role" Type="Self.role" Multiplicity="1" />
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="role_id" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_movie_id">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="user_movie" Type="Self.user_movie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="user_movie">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="huduEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="actors" EntityType="Self.actor" />
+          <EntitySet Name="genres" EntityType="Self.genre" />
+          <EntitySet Name="movies" EntityType="Self.movie" />
+          <EntitySet Name="movie_actor" EntityType="Self.movie_actor" />
+          <EntitySet Name="movie_genre" EntityType="Self.movie_genre" />
+          <EntitySet Name="payments" EntityType="Self.payment" />
+          <EntitySet Name="roles" EntityType="Self.role" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <EntitySet Name="user_movie" EntityType="Self.user_movie" />
+          <AssociationSet Name="FK_movie_actor_actor" Association="Self.FK_movie_actor_actor">
+            <End Role="actor" EntitySet="actors" />
+            <End Role="movie_actor" EntitySet="movie_actor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_movie_genre_genre" Association="Self.FK_movie_genre_genre">
+            <End Role="genre" EntitySet="genres" />
+            <End Role="movie_genre" EntitySet="movie_genre" />
+          </AssociationSet>
+          <AssociationSet Name="FK_movie_actor_movie" Association="Self.FK_movie_actor_movie">
+            <End Role="movie" EntitySet="movies" />
+            <End Role="movie_actor" EntitySet="movie_actor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_movie_genre_movie_genre" Association="Self.FK_movie_genre_movie_genre">
+            <End Role="movie" EntitySet="movies" />
+            <End Role="movie_genre" EntitySet="movie_genre" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_movie_movie" Association="Self.FK_user_movie_movie">
+            <End Role="movie" EntitySet="movies" />
+            <End Role="user_movie" EntitySet="user_movie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_payment_user" Association="Self.FK_payment_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="payment" EntitySet="payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_role" Association="Self.FK_user_role">
+            <End Role="role" EntitySet="roles" />
+            <End Role="user" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_movie_id" Association="Self.FK_user_movie_id">
+            <End Role="user" EntitySet="users" />
+            <End Role="user_movie" EntitySet="user_movie" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="huduModelStoreContainer" CdmEntityContainer="huduEntities">
+          <EntitySetMapping Name="actors">
+            <EntityTypeMapping TypeName="huduModel.actor">
+              <MappingFragment StoreEntitySet="actor">
+                <ScalarProperty Name="actor_id" ColumnName="actor_id" />
+                <ScalarProperty Name="actor_name" ColumnName="actor_name" />
+                <ScalarProperty Name="actor_gender" ColumnName="actor_gender" />
+                <ScalarProperty Name="actor_wiki_link" ColumnName="actor_wiki_link" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="genres">
+            <EntityTypeMapping TypeName="huduModel.genre">
+              <MappingFragment StoreEntitySet="genre">
+                <ScalarProperty Name="genre_id" ColumnName="genre_id" />
+                <ScalarProperty Name="genre_name" ColumnName="genre_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="movies">
+            <EntityTypeMapping TypeName="huduModel.movie">
+              <MappingFragment StoreEntitySet="movie">
+                <ScalarProperty Name="movie_id" ColumnName="movie_id" />
+                <ScalarProperty Name="movie_name" ColumnName="movie_name" />
+                <ScalarProperty Name="movie_year" ColumnName="movie_year" />
+                <ScalarProperty Name="movie_description" ColumnName="movie_description" />
+                <ScalarProperty Name="movie_runtime" ColumnName="movie_runtime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="movie_actor">
+            <EntityTypeMapping TypeName="huduModel.movie_actor">
+              <MappingFragment StoreEntitySet="movie_actor">
+                <ScalarProperty Name="movie_id" ColumnName="movie_id" />
+                <ScalarProperty Name="actor_id" ColumnName="actor_id" />
+                <ScalarProperty Name="movie_actor_cast" ColumnName="movie_actor_cast" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="movie_genre">
+            <EntityTypeMapping TypeName="huduModel.movie_genre">
+              <MappingFragment StoreEntitySet="movie_genre">
+                <ScalarProperty Name="movie_id" ColumnName="movie_id" />
+                <ScalarProperty Name="genre_id" ColumnName="genre_id" />
+                <ScalarProperty Name="movie_genre_id" ColumnName="movie_genre_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="payments">
+            <EntityTypeMapping TypeName="huduModel.payment">
+              <MappingFragment StoreEntitySet="payment">
+                <ScalarProperty Name="payment_id" ColumnName="payment_id" />
+                <ScalarProperty Name="payment_user_id" ColumnName="payment_user_id" />
+                <ScalarProperty Name="payment_card_number" ColumnName="payment_card_number" />
+                <ScalarProperty Name="payment_card_cvv" ColumnName="payment_card_cvv" />
+                <ScalarProperty Name="payement_card_expiry" ColumnName="payement_card_expiry" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="roles">
+            <EntityTypeMapping TypeName="huduModel.role">
+              <MappingFragment StoreEntitySet="role">
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+                <ScalarProperty Name="role_name" ColumnName="role_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="huduModel.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="user_fname" ColumnName="user_fname" />
+                <ScalarProperty Name="user_lname" ColumnName="user_lname" />
+                <ScalarProperty Name="user_date_of_birth" ColumnName="user_date_of_birth" />
+                <ScalarProperty Name="user_email" ColumnName="user_email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="passwordhash" ColumnName="passwordhash" />
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+                <ScalarProperty Name="user_is_active" ColumnName="user_is_active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_movie">
+            <EntityTypeMapping TypeName="huduModel.user_movie">
+              <MappingFragment StoreEntitySet="user_movie">
+                <ScalarProperty Name="user_movies_id" ColumnName="user_movies_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="movie_id" ColumnName="movie_id" />
+                <ScalarProperty Name="movie_rental_expiry" ColumnName="movie_rental_expiry" />
+                <ScalarProperty Name="movie_owns" ColumnName="movie_owns" />
+                <ScalarProperty Name="movie_tx_date" ColumnName="movie_tx_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
