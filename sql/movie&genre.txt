@@ -1,0 +1,34 @@
+USE [hudu]
+GO
+SET IDENTITY_INSERT [dbo].[genre] ON 
+GO
+INSERT [dbo].[genre] ([genre_id], [genre_name]) VALUES (1, N'Action')
+GO
+INSERT [dbo].[genre] ([genre_id], [genre_name]) VALUES (2, N'Adventure')
+GO
+INSERT [dbo].[genre] ([genre_id], [genre_name]) VALUES (3, N'Biography')
+GO
+INSERT [dbo].[genre] ([genre_id], [genre_name]) VALUES (4, N'Comedy')
+GO
+INSERT [dbo].[genre] ([genre_id], [genre_name]) VALUES (5, N'Documentary')
+GO
+INSERT [dbo].[genre] ([genre_id], [genre_name]) VALUES (6, N'Romance')
+GO
+INSERT [dbo].[genre] ([genre_id], [genre_name]) VALUES (7, N'Horror')
+GO
+INSERT [dbo].[genre] ([genre_id], [genre_name]) VALUES (8, N'Thriller')
+GO
+SET IDENTITY_INSERT [dbo].[genre] OFF
+GO
+SET IDENTITY_INSERT [dbo].[movie] ON 
+GO
+INSERT [dbo].[movie] ([movie_id], [movie_name], [movie_year], [movie_description], [movie_runtime]) VALUES (1, N'Mission Impossible: Rogue Nation', 2015, N'Ethan and team take on their most impossible mission yet, eradicating the Syndicate - an International rogue organization as highly skilled as they are, committed to destroying the IMF.', 131)
+GO
+INSERT [dbo].[movie] ([movie_id], [movie_name], [movie_year], [movie_description], [movie_runtime]) VALUES (2, N'Green Lantern', 2011, N'Reckless test pilot Hal Jordan is granted an alien ring that bestows him with otherworldly powers that inducts him into an intergalactic police force, the Green Lantern Corps.', 114)
+GO
+INSERT [dbo].[movie] ([movie_id], [movie_name], [movie_year], [movie_description], [movie_runtime]) VALUES (3, N'Casino Royale', 2006, N'Armed with a license to kill, Secret Agent James Bond sets out on his first mission as 007, and must defeat a private banker to terrorists in a high stakes game of poker at Casino Royale, Montenegro, but things are not what they seem.', 144)
+GO
+INSERT [dbo].[movie] ([movie_id], [movie_name], [movie_year], [movie_description], [movie_runtime]) VALUES (10, N'Pirates of the Caribbean: Curse on the black pearl', 2003, N'Blacksmith Will Turner teams up with eccentric pirate "Captain" Jack Sparrow to save his love, the governor''s daughter, from Jack''s former pirate allies, who are now undead.', 143)
+GO
+SET IDENTITY_INSERT [dbo].[movie] OFF
+GO
