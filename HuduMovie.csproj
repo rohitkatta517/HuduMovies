@@ -190,9 +190,15 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\actorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\moviesController.cs" />
+    <Compile Include="Controllers\movie_actorController.cs" />
+    <Compile Include="Controllers\movie_genreController.cs" />
+    <Compile Include="Controllers\paymentsController.cs" />
     <Compile Include="Controllers\rolesController.cs" />
     <Compile Include="Controllers\usersController.cs" />
+    <Compile Include="Controllers\user_movieController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
