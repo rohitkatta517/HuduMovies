@@ -23,7 +23,7 @@ namespace HuduMovie.Models
     
         public int user_id { get; set; }
         public string user_fname { get; set; }
-        public byte[] user_lname { get; set; }
+        public string user_lname { get; set; }
         public Nullable<System.DateTime> user_date_of_birth { get; set; }
         public string user_email { get; set; }
         public string password { get; set; }

@@ -25,3 +25,50 @@ GO
 
 
 /* Use this insert in User  */
+USE [hudu]
+GO
+
+INSERT INTO [dbo].[user]
+           ([user_fname]
+           ,[user_lname]
+           ,[user_date_of_birth]
+           ,[user_email]
+           ,[password]
+           ,[passwordhash]
+           ,[role_id]
+           ,[user_is_active])
+     VALUES
+           ('Harsha'
+           ,'Keerthipati'
+           ,'1-1-1111'
+           ,'harshajonkayi@gmail.com'
+           ,'jonkayi'
+           ,'###'
+           ,1
+           ,1)
+GO
+
+
+
+USE [hudu]
+GO
+
+INSERT INTO [dbo].[user]
+           ([user_fname]
+           ,[user_lname]
+           ,[user_date_of_birth]
+           ,[user_email]
+           ,[password]
+           ,[passwordhash]
+           ,[role_id]
+           ,[user_is_active])
+     VALUES
+           ('admin'
+           ,'admin'
+           ,'1-1-1970'
+           ,'admin@gmail.com'
+           ,'admin123'
+           ,'###'
+           ,2
+           ,1)
+GO
